@@ -106,7 +106,7 @@ const addNewNote = async(req, res) => {
         }
 
         const note = await Note.create(newNote)
-        return res.status(201).send({ data: note, message: "New Note added successfully",})
+        return res.status(200).send({ data: note, message: "New Note added successfully"})
 
 
     } catch (error) {
