@@ -25,6 +25,7 @@ function DeletedNotesList() {
 
   return (
     <div className="flex p-5 min-h-screen h-fit max-h-fit bg-slate-100">
+      
       <SideBar />
       <div className="w-full md:w-5/6 bg-white rounded-2xl pl-2 pb-5">
         <div className="flex items-center justify-end">
@@ -41,7 +42,7 @@ function DeletedNotesList() {
         {loading ? (
           <Loader />
         ) : (
-          <div class="grid grid-flow-row-dense sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-rows-3 pl-4">
+          <div className="grid grid-flow-row-dense sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-rows-3 pl-4">
             {notes.map((item) => (
               <DeletedCard key={item._id} data={item} />
             ))}

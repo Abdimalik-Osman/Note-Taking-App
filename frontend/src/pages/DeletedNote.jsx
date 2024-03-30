@@ -3,7 +3,7 @@ import SideBar from '../components/SideBar'
 import {useParams,useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import Loader from '../components/Loader';
-
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
@@ -25,7 +25,8 @@ function DeletedNote() {
       
     })
     .catch((err)=>
-    console.log(err)
+    // console.log(err)
+    toast.error(err)
     )
   },[id])
 
@@ -33,11 +34,14 @@ function DeletedNote() {
   const submitHandler=()=>{
       axios.put(`https://note-taking-app-backend-six.vercel.app/note/delete/${id}`)
       .then(()=>{
-        alert(notes.title+` has been ${isActive?"added":"removed"} to recycle bin`);
-        navigate('/')
+        toast.success(notes.title+` has been ${isActive?"added":"removed"} to recycle bin`);
+        setTimeout(()=>{
+          navigate("/"); 
+        },3000) 
+        
       })
       .catch((err)=>{
-        alert("This process has following errors\n"+err)
+        toast.error("This process has following errors\n"+err)
       })
   }
 
@@ -47,6 +51,7 @@ function DeletedNote() {
 
   return (
     <div>
+      <ToastContainer />
       {loading?(<Loader/>):(
 
         <div className='flex p-5 h-screen w-screen max-h-fit bg-slate-900'>

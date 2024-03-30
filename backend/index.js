@@ -41,8 +41,8 @@ app.get('/category/:id', getOneCategryData)
 app.delete('/category/:id', deleteCategory)
 
 
-const PORT = process.env.PORT;
-const URL = process.env.URL;
+const PORT = process.env.PORT || 5000;
+const URL = process.env.URL || 'mongodb://localhost:27017/DairyDB';
 
 
 //establish connection to mongodb  database using mongoose

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import axios from "axios";
-
+import { ToastContainer, toast } from 'react-toastify';
 //this component work as simple moadel
 function ReoveNote() {
   const [loading, setLoading] = useState(false);
@@ -15,8 +15,11 @@ function ReoveNote() {
       .delete(`https://note-taking-app-backend-six.vercel.app/remove`)
       .then(() => {
         setLoading(false);
-        alert("Recycle Bin is Empty now");
-        navigate("/");
+        toast.success("Recycle Bin is Empty now");
+        setTimeout(()=>{
+          navigate("/"); 
+        },3000) 
+        
       })
       .catch((err) => {
         setLoading(false);
@@ -30,6 +33,7 @@ function ReoveNote() {
   };
   return (
     <div>
+      <ToastContainer />
       {loading ? (
         <Loader />
       ) : (

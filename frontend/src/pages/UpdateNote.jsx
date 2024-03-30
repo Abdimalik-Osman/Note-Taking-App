@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SideBar from "../components/SideBar";
 import BackButton from "../components/BackButton";
 import "../App.css";
@@ -6,7 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Loader from "../components/Loader";
-
+import { ToastContainer, toast } from 'react-toastify';
 function UpdateNote() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -62,7 +62,7 @@ function UpdateNote() {
   const submitHandler = (e) => {
     e.preventDefault();
     if (!title || !content) {
-      return alert("Please fill out all fields");
+      return toast.error("Please fill out all fields");
     } else {
       const newNote = {
         title: title,
@@ -74,17 +74,21 @@ function UpdateNote() {
       axios
         .put(`https://note-taking-app-backend-six.vercel.app/note/${id}`, newNote)
         .then(() => {
-          alert("Note Updated Successfully");
-          navigate("/");
+          toast.success("Note Updated Successfully");
+          setTimeout(()=>{
+            navigate("/"); 
+          },3000) 
+     
         })
 
         .catch((err) => {
-          alert("system has following errors\n" + err);
+          toast.error("system has following errors\n" + err);
         });
     }
   };
   return (
     <div>
+      <ToastContainer />
       {loading ? (
         <Loader />
       ) : (

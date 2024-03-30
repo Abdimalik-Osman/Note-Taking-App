@@ -4,7 +4,7 @@ import BackButton from "../components/BackButton";
 import "../App.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { ToastContainer, toast } from 'react-toastify';
 function AddNote() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -53,12 +53,15 @@ function AddNote() {
       axios
         .post("https://note-taking-app-backend-six.vercel.app/note", newNote)
         .then(() => {
-          alert("Note Added Successfully");
-          navigate("/");
+          toast.success("Note Added Successfully");
+                        
           setTitle("");
           setContent("");
           setColor("#ffffff");
           setCategory("");
+          setTimeout(()=>{
+            navigate("/"); 
+          },3000) 
         })
 
         .catch((err) => {
@@ -67,6 +70,8 @@ function AddNote() {
     }
   };
   return (
+    <>
+    <ToastContainer />
     <div className="h-screen max-h-fit  flex md:p-5 md:h-screen bg-slate-100">
       <SideBar />
       <div className="w-screen m-2 md:w-5/6 bg-white rounded-2xl pl-2">
@@ -168,6 +173,7 @@ function AddNote() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
