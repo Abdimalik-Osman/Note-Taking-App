@@ -42,12 +42,11 @@ function DeletedNotesList() {
 
         {loading ? (
           <Loader />
-        ) : (
-          <div className="grid grid-flow-row-dense sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-rows-3 pl-4">
-            {notes.map((item) => (
-              <DeletedCard key={item._id} data={item} />
-            ))}
-          </div>
+        ) : (notes.length==0?(<EmptyComp/>):(<div className="grid grid-flow-row-dense sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-rows-3 pl-4">
+        {notes.map((item) => (
+          <DeletedCard key={item._id} data={item} />
+        ))}
+      </div>)
         )}
       </div>
     </div>
