@@ -5,6 +5,8 @@ import Card from "../components/Card";
 import AddButton from "../components/AddButton";
 import Loader from "../components/Loader";
 import axios from "axios";
+import Drawer from "../components/DrawerComp";
+import EmptyComp from "../components/EmptyComp";
 
 function Home() {
   //usestate for stored fetched data from db
@@ -35,7 +37,9 @@ function Home() {
   //search function for get dynamic data according to title and content
   const handleSearch = () => {
     axios
-      .get(`https://note-taking-app-backend-six.vercel.app/search?term=${searchTerm}`)
+      .get(
+        `https://note-taking-app-backend-six.vercel.app/search?term=${searchTerm}`
+      )
       .then((res) => {
         //if there was a no result, then load the default data again
         if (notes.length == 0) {
@@ -69,19 +73,9 @@ function Home() {
             <div className="p-3 bg-white rounded-full">
               <IoIosSearch />
             </div>
-            {/* this is dropdown menu . only displayed in mobile size */}
-        
           </div>
-          <select
-            name=""
-            id=""
-            className="mr-5 sm:hidden p-3 border-2 w-[8rem] text-slate-400 border-slate-400 rounded-full"
-          >
-            <option value="">Home</option>
-            <option value="">Form</option>
-          </select>
+          <Drawer />
         </div>
-
         {/* if there was some issues load the loader
                  this trigger when
                       * error occur
@@ -89,8 +83,9 @@ function Home() {
          */}
         {loading ? (
           <Loader />
+        ) : notes.length == 0 ? (
+          <EmptyComp /> /* if not display this div */
         ) : (
-          /* if not display this div */
           <div class="grid grid-flow-row-dense sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-rows-3 pl-4">
             {/* dynamically displayed note data */}
             {notes.map((item) => (

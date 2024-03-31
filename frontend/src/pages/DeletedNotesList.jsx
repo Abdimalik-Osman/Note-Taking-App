@@ -5,6 +5,7 @@ import axios from "axios";
 import Loader from "../components/Loader";
 import DeletedCard from "../components/DeletedCard";
 import { Link } from "react-router-dom";
+import EmptyComp from "../components/EmptyComp";
 
 function DeletedNotesList() {
   const [notes, setNotes] = useState([]);
@@ -54,3 +55,4 @@ function DeletedNotesList() {
 }
 
 export default DeletedNotesList;
+
